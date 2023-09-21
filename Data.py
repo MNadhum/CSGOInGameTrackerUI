@@ -1,6 +1,5 @@
 import PIL.Image
 import requests
-import json
 import os
 
 API_KEY = os.getenv("API_KEY")
@@ -32,7 +31,7 @@ def LoadFileName(path):
 
 def FindDataInFile(fileName):
     """
-    Gathers player's data from the console dump text file
+    Gathers player's data from the console dump text file.
 
     :param fileName (string): Name of condump file to extract data from
     :return (str): Player data taken from the condump file to be used in API request
@@ -58,9 +57,9 @@ def FindDataInFile(fileName):
 
 def ConvertRankToFileName(rank):
     """
-
-    :param rank:
-    :return:
+    Maps player's rank to the name of the image file correlating to the player's rank.
+    :param rank: Player's rank
+    :return: Path of image file
     """
     if rank == "unranked":
         rank = "assets/skillgroup_none.png"
@@ -104,10 +103,11 @@ def ConvertRankToFileName(rank):
 
 def GetProfileImage(url, playerNum):
     """
+    Player images are received as URLs, this function downloads the image.
 
-    :param url:
-    :param playerNum:
-    :return:
+    :param url: URL of the player's image
+    :param playerNum: The player's local number, used for distinguishing between all the player's images
+    :return: Path to the players' image file
     """
     imagePathJPG = "assets/" + str(playerNum) + "_profile.jpg"
     with open(imagePathJPG, "wb") as f:
@@ -120,9 +120,10 @@ def GetProfileImage(url, playerNum):
 
 def APIRequest(sendingData):
     """
+    Handles API request with back end.
 
-    :param sendingData:
-    :return:
+    :param sendingData: Data to be sent to the API (retrieved from condump file)
+    :return: List of dictionaries, each dictionary containing a player's data
     """
 
     requestHeaders = {"Content-Type" : "text/plain", "x-api-key" : API_KEY}
@@ -137,9 +138,10 @@ def APIRequest(sendingData):
 
 def ProcessAPIData(playerList):
     """
+    Processes the data from the API and keeps relevant information.
 
-    :param playerList:
-    :return:
+    :param playerList: List of player dictionaries
+    :return: List of new player dictionaries, which contain required to display relevant information
     """
     groups = [[],[],[],[]]
     playerNum = 0
@@ -149,11 +151,14 @@ def ProcessAPIData(playerList):
         newPlayer["name"] = player["name"]
         newPlayer["winRate"] = round(player["winRate"] * 100)
         newPlayer["faceIT"] = "assets/f0.png"
+
         if player["faceIT"] != -1:
             newPlayer["faceIT"] = "assets/f" + str(player["faceIT"]) + ".png"
+
         newPlayer["rankImage"] = ConvertRankToFileName(player["rank"])
         newPlayer["profileImage"] = GetProfileImage(player["avatar"], playerNum)
 
+        # Assigns each player a group based on who they are queued with
         queuedWithList = list(player["queuedWith"].items())
         newPlayer["group"] = -1
         if len(queuedWithList) != 0:
@@ -193,8 +198,9 @@ def ProcessAPIData(playerList):
 
 def CleanUpFiles():
     """
+    Cleans up files that were downloaded for displaying purposes (player images).
 
-    :return:
+    :return: None
     """
     for fileName in os.listdir("assets/"):
         if (fileName.endswith("_profile.png")) or (fileName.endswith("_profile.jpg")):
