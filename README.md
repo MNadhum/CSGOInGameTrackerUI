@@ -5,9 +5,7 @@ information regarding the players in their current CS:GO game. This part of the 
 functionality by collecting local data, contacting API, creating the GUI, and displaying relevant data based
 on API response.
 
-## Getting Started
-
-### Dependencies
+## Dependencies
 
 * Libraries: PySimpleGUI, PIL (Python Imaging Library), requests
 
