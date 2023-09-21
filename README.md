@@ -1,7 +1,5 @@
 # CSGOInGameTrackerUI
 
-## Description
-
 This is an application which allows users, with a click of a single button, to receive
 information regarding the players in their current CS:GO game. This part of the application handles the client-side 
 functionality by collecting local data, contacting API, creating the GUI, and displaying relevant data based
