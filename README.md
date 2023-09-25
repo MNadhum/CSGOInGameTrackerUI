@@ -24,11 +24,11 @@ on API response.
 	    bind "p" "+tracker"
 	    ```
 #### Run Program
-1. Set the CS:GO path using "Game" menu in the toolbar, as shown ![here](#Menu-Settings). By default, the path should be similar to this: 
+1. Set the CS:GO path using "Game" menu in the toolbar, as shown [here](#menu-settings). By default, the path should be similar to this: 
 
    ```C:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\csgo```
 3. Run the single-key bind in-game so that the "clear", "status", "condump" commands are run
-4. Check for New Game using "Game" menu in toolbar, as shown ![here](#Menu-Settings), and program will automatically display data once it has been retrieved, as shown ![here](#Example-Game-Output)
+4. Check for New Game using "Game" menu in toolbar, as shown [here](#menu-settings), and program will automatically display data once it has been retrieved, as shown [here](#example-game-output)
 
 ## Screenshots
 ##### Startup Screen
